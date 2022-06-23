@@ -2,6 +2,12 @@
 "use strict";
 const root = document.getElementById('root');
 
+const mapSocialClass = new Map();
+mapSocialClass.set('www.facebook.com', "fa-facebook");
+mapSocialClass.set('twitter.com', "fa-twitter");
+mapSocialClass.set('www.instagram.com', "fa-instagram");
+
+
 /**
  * 
  * @param {string} tag 
