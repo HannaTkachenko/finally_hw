@@ -46,8 +46,8 @@ const createCard = (user) => {
     "article",
     { classNames: ["card"] },
     // createCardWrapper(user),
-    h2
-    // createLinkWrapper(user)
+    h2,
+    createLinkWrapper(user),
   );
 };
 
@@ -62,9 +62,18 @@ const createLink = (element) => {
   return link;
 };
 
+const createLinkWrapper = (user) => {
+  const linkWrapper = document.createElement("ul");
+  linkWrapper.classList.add("social-networks");
 
+  const { contacts } = user;
+  contacts.forEach((element) => {
+    linkWrapper.append(createLink(element));
+  });
 
+  return linkWrapper;
 
+};
 
 const stringToColour = (str) => {
   let hash = 0;
