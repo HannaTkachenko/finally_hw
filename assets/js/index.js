@@ -84,6 +84,23 @@ const createImage = ({ id, profilePicture, firstName }) => {
   img.addEventListener("load", photoLoadHandler);
 };
 
+const createCardWrapper = (user) => {
+  const { id, firstName } = user;
+  const photoWrapper = document.createElement("div");
+  photoWrapper.classList.add("card-photo-wrapper");
+  photoWrapper.setAttribute("id", `wrapper-${id}`);
+
+  const initials = document.createElement("div");
+  initials.classList.add("card-initials");
+  initials.style.backgroundColor = stringToColour(firstName);
+  initials.append(document.createTextNode(firstName[0] || "NN")); 
+
+  photoWrapper.append(initials);
+  createImage(user);
+  return photoWrapper;
+}
+
+
 const stringToColour = (str) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
