@@ -14,7 +14,7 @@ mapSocialClass.set("www.instagram.com", "fa-instagram");
  * @param {objects} children
  * @returns
  */
-createElement = (
+const createElement = (
   tag = "div",
   { classNames = [], attributes = {}, events = {} },
   ...children
@@ -33,25 +33,40 @@ createElement = (
   return element;
 };
 
-getFullName = (user) => `${user.firstName}${user.lastName}`;
+const getFullName = (user) => `${user.firstName}${user.lastName}`;
 
-createCard = (user) => {
+const createCard = (user) => {
   const h2 = createElement(
     "h2",
-    { classNames: [fullName] },
-    document.createTextNode(user.getFullName(user) || "No Name")
+    { classNames: ["fullName"] },
+    document.createTextNode(getFullName(user) || "No Name")
   );
 
   return createElement(
     "article",
-    { classNames: [card] },
-    createCardWrapper(user),
-    h2,
-    createLinkWrapper(user)
+    { classNames: ["card"] },
+    // createCardWrapper(user),
+    h2
+    // createLinkWrapper(user)
   );
 };
 
-stringToColour = (str) => {
+const createLink = (element) => {
+  const url = new URL(element);
+  const link = document.createElement("a");
+  link.classList.add("fa-brands");
+  link.classList.add(mapSocialClass.get(url.hostname));
+  link.setAttribute("href", element);
+  link.setAttribute("target", "_blank");
+
+  return link;
+};
+
+
+
+
+
+const stringToColour = (str) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
