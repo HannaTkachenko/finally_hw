@@ -100,6 +100,19 @@ const createCardWrapper = (user) => {
   return photoWrapper;
 }
 
+const photoLoadHandler = ({ target }) => {
+  const parent = document.getElementById(target.dataset.id);
+  parent.append(target);
+}
+
+
+const photoErrorHandler = ({ target }) =>{
+  target.remove();
+  return;
+}
+
+
+
 
 const stringToColour = (str) => {
   let hash = 0;
