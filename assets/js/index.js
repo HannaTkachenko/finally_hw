@@ -33,17 +33,25 @@ createElement = (
   return element;
 };
 
-fullName = (user) => `${user.firstName}${user.lastName}`;
+getFullName = (user) => `${user.firstName}${user.lastName}`;
 
- createCard = (user)=>{
-  const url = new URL(user.contacts[0]);
-  const a = document.createElement('a');
-  a.classList.add(mapSocialClass.get(url.hostname));
-  
-  return createElement('article',{}, document.createTextNode(user.fullName()) );
-}
+createCard = (user) => {
+  const h2 = createElement(
+    "h2",
+    { classNames: [fullName] },
+    document.createTextNode(user.getFullName(user) || "No Name")
+  );
 
- stringToColour= (str) => {
+  return createElement(
+    "article",
+    { classNames: [card] },
+    createCardWrapper(user),
+    h2,
+    createLinkWrapper(user)
+  );
+};
+
+stringToColour = (str) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -54,8 +62,7 @@ fullName = (user) => `${user.firstName}${user.lastName}`;
     colour += ("00" + value.toString(16)).slice(-2);
   }
   return colour;
-}
-
+};
 
 fetch("./data.json")
   .then((response) => response.json())
