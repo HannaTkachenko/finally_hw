@@ -47,7 +47,7 @@ const createCard = (user) => {
     { classNames: ["card"] },
     // createCardWrapper(user),
     h2,
-    createLinkWrapper(user),
+    createLinkWrapper(user)
   );
 };
 
@@ -72,7 +72,16 @@ const createLinkWrapper = (user) => {
   });
 
   return linkWrapper;
+};
 
+const createImage = ({ id, profilePicture, firstName }) => {
+  const img = document.createElement("img");
+  img.classList.add("card-photo");
+  img.setAttribute("src", profilePicture);
+  img.setAttribute("alt", firstName);
+  img.dataset.id = `wrapper-${id}`;
+  img.addEventListener("error", photoErrorHandler);
+  img.addEventListener("load", photoLoadHandler);
 };
 
 const stringToColour = (str) => {
