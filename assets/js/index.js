@@ -36,13 +36,12 @@ const createElement = (
 const getFullName = (user) => `${user.firstName} ${user.lastName}`;
 
 const createCard = (user) => {
-  
   return createElement(
     "article",
     { classNames: ["card"] },
     createCardWrapper(user),
     createUserName(user),
-    createLinkWrapper(user),
+    createLinkWrapper(user)
   );
 };
 
@@ -53,8 +52,7 @@ const createUserName = (user) => {
     document.createTextNode(getFullName(user) || "No Name")
   );
   return userName;
-}
-
+};
 
 const createLink = (element) => {
   const url = new URL(element);
@@ -146,20 +144,20 @@ const choosed = document.getElementById("choosed");
 
 document.addEventListener("click", (e) => {
   e.preventDefault();
-  const userName =
-    e.target.textContent !== " "
-      ? e.target.textContent
-      : e.target.textContent.substring(0);
-  if (!state.includes(userName)) {
-    state.push(userName);
-    choosed.append(createList(userName));
+  const choosedUserName = e.target.textContent
+    ? e.target.textContent
+    : e.target.textContent.substring(0);
+
+  if (!state.includes(choosedUserName)) {
+    state.push(choosedUserName);
+    choosed.append(createList(choosedUserName));
   }
 });
 
-function createList(list) {
+const createList = (list) => {
   return createElement(
     "li",
-    { classNames: ["list-iteam"] },
+    { classNames: ["list-item"] },
     document.createTextNode(list)
   );
-}
+};
