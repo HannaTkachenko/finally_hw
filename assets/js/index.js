@@ -93,7 +93,7 @@ const createCardWrapper = (user) => {
   const initials = document.createElement("div");
   initials.classList.add("card-initials");
   initials.style.backgroundColor = stringToColour(firstName);
-  initials.append(document.createTextNode(firstName[0]+lastName[0] || "NN"));
+  initials.append(document.createTextNode(firstName[0] + lastName[0] || "NN"));
 
   photoWrapper.append(initials);
   createImage(user);
@@ -134,3 +134,27 @@ fetch("./data.json")
   .catch((error) => {
     console.error(error);
   });
+
+const stateSet = new Set();
+const state = [];
+const choosed = document.getElementById("choosed");
+
+document.addEventListener("click", (e) => {
+  e.preventDefault();
+  const userName =
+    e.target.textContent !== " "
+      ? e.target.textContent
+      : e.target.textContent.substring(0);
+  if (!state.includes(userName)) {
+    state.push(userName);
+    choosed.append(createList(userName));
+  }
+});
+
+function createList(list) {
+  return createElement(
+    "li",
+    { classNames: ["list-iteam"] },
+    document.createTextNode(list)
+  );
+}
