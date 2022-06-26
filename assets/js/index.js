@@ -45,7 +45,7 @@ const createCard = (user) => {
   return createElement(
     "article",
     { classNames: ["card"] },
-    // createCardWrapper(user),
+    createCardWrapper(user),
     h2,
     createLinkWrapper(user)
   );
@@ -85,7 +85,7 @@ const createImage = ({ id, profilePicture, firstName }) => {
 };
 
 const createCardWrapper = (user) => {
-  const { id, firstName } = user;
+  const { id, firstName, lastName } = user;
   const photoWrapper = document.createElement("div");
   photoWrapper.classList.add("card-photo-wrapper");
   photoWrapper.setAttribute("id", `wrapper-${id}`);
@@ -93,26 +93,22 @@ const createCardWrapper = (user) => {
   const initials = document.createElement("div");
   initials.classList.add("card-initials");
   initials.style.backgroundColor = stringToColour(firstName);
-  initials.append(document.createTextNode(firstName[0] || "NN")); 
+  initials.append(document.createTextNode(firstName[0]+lastName[0] || "NN"));
 
   photoWrapper.append(initials);
   createImage(user);
   return photoWrapper;
-}
+};
 
 const photoLoadHandler = ({ target }) => {
   const parent = document.getElementById(target.dataset.id);
   parent.append(target);
-}
+};
 
-
-const photoErrorHandler = ({ target }) =>{
+const photoErrorHandler = ({ target }) => {
   target.remove();
   return;
-}
-
-
-
+};
 
 const stringToColour = (str) => {
   let hash = 0;
@@ -130,16 +126,11 @@ const stringToColour = (str) => {
 fetch("./data.json")
   .then((response) => response.json())
   .then((users) => {
-    const cards = users.map((user) => createCard(user));
+    const cards = users
+      .filter(({ firstName, lastName }) => firstName && lastName)
+      .map((user) => createCard(user));
     root.append(...cards);
   })
   .catch((error) => {
-    document.body.prepend(document.createTextNode("500"));
-    if (error instanceof TypeError) {
-      console.error("Ошибка соединения: ", error);
-    } else if (error instanceof SyntaxError) {
-      console.error("Проверь запятые: ", error);
-    } else {
-      console.error(error);
-    }
+    console.error(error);
   });
