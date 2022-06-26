@@ -36,20 +36,25 @@ const createElement = (
 const getFullName = (user) => `${user.firstName} ${user.lastName}`;
 
 const createCard = (user) => {
-  const h2 = createElement(
-    "h2",
-    { classNames: ["fullName"] },
-    document.createTextNode(getFullName(user) || "No Name")
-  );
-
+  
   return createElement(
     "article",
     { classNames: ["card"] },
     createCardWrapper(user),
-    h2,
-    createLinkWrapper(user)
+    createUserName(user),
+    createLinkWrapper(user),
   );
 };
+
+const createUserName = (user) => {
+  const userName = createElement(
+    "h2",
+    { classNames: ["fullName"] },
+    document.createTextNode(getFullName(user) || "No Name")
+  );
+  return userName;
+}
+
 
 const createLink = (element) => {
   const url = new URL(element);
