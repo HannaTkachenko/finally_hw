@@ -1,0 +1,95 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(
+    0deg,
+    rgba(255, 103, 108, 1) 0%,
+    rgba(255, 255, 255, 1) 71%
+  );
+}
+
+h1 {
+  margin-top: 1rem;
+  font-size: 3rem;
+  color: #ff676c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+section {
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  min-width: 320px;
+  max-width: 1200px;
+}
+
+.card {
+  margin: 1rem;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 300px;
+  height: 350px;
+
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 11px 1px rgba(0, 0, 0, 0.3);
+}
+
+.card-photo-wrapper {
+  margin: auto;
+  position: relative;
+}
+.card-initials {
+  margin: 2px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 4rem;
+  border-radius: 50%;
+}
+.card-photo {
+  margin: 2px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 50%;
+  bottom: 0;
+  object-fit: cover;
+  object-position: top;
+}
+.fullName {
+  margin: 1rem 0 1.5rem 0;
+  text-transform: capitalize;
+}
+
+a {
+  margin: 1rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+
+  border-radius: 50%;
+  color: #fff;
+  background: #ff676c;
+  border: 2px solid #ff676c;
+}
+

@@ -33,7 +33,7 @@ const createElement = (
   return element;
 };
 
-const getFullName = (user) => `${user.firstName}${user.lastName}`;
+const getFullName = (user) => `${user.firstName} ${user.lastName}`;
 
 const createCard = (user) => {
   const h2 = createElement(
