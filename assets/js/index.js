@@ -135,8 +135,17 @@ fetch("./data.json")
     root.append(...cards);
   })
   .catch((error) => {
-    console.error(error);
-  });
+    document.body.prepend(document.createTextNode('500'));
+    
+    if (error instanceof TypeError) {
+      console.error("Ошибка соединения: ", error);
+    }else if (error instanceof SyntaxError) {
+      console.error("Проверь запятые: ", error);
+    }else{
+      console.error(error);
+    }
+  })
+
 
 const stateSet = new Set();
 const state = [];
