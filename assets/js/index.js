@@ -146,7 +146,7 @@ document.addEventListener("click", (e) => {
   e.preventDefault();
   const choosedUserName =
     e.target.innerText.length > 2 ? e.target.innerText : (undefined.style.display = none);
-//костыль//
+//костыль, чтобы не отображались инициалы при клике на фотографию//
 
   if (!state.includes(choosedUserName)) {
     state.push(choosedUserName);
@@ -154,10 +154,10 @@ document.addEventListener("click", (e) => {
   }
 });
 
-const createList = (list) => {
+const createList = (choosedUserName) => {
   return createElement(
     "li",
     { classNames: ["selected-card"] },
-    document.createTextNode(list)
+    document.createTextNode(choosedUserName)
   );
 };

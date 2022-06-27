@@ -18,7 +18,7 @@ body {
   );
 }
 
-h1 {
+h1, .choose-section-title {
   margin-top: 1rem;
   font-size: 3rem;
   color: #ff676c;
@@ -93,3 +93,15 @@ a {
   border: 2px solid #ff676c;
 }
 
+.choose-section-title{
+  display: inline-block;
+  background-color: white;
+  width: 500px;
+  text-align: center;
+}
+
+#choosed>li{
+  list-style: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
