@@ -144,9 +144,9 @@ const choosed = document.getElementById("choosed");
 
 document.addEventListener("click", (e) => {
   e.preventDefault();
-  const choosedUserName = e.target.textContent
-    ? e.target.textContent
-    : e.target.textContent.substring(0);
+  const choosedUserName =
+    e.target.innerText.length > 2 ? e.target.innerText : (undefined.style.display = none);
+//костыль//
 
   if (!state.includes(choosedUserName)) {
     state.push(choosedUserName);
@@ -157,7 +157,7 @@ document.addEventListener("click", (e) => {
 const createList = (list) => {
   return createElement(
     "li",
-    { classNames: ["list-item"] },
+    { classNames: ["selected-card"] },
     document.createTextNode(list)
   );
 };
