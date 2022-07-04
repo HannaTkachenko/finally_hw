@@ -64,14 +64,11 @@ const createLink = (element) => {
 };
 
 const createLinkWrapper = (user) => {
-  const linkWrapper = document.createElement("ul");
-  linkWrapper.classList.add("social-networks");
-
+  const linkWrapper = createElement("ul", { classNames: "social-networks" });
   const { contacts } = user;
   contacts.forEach((element) => {
     linkWrapper.append(createLink(element));
   });
-
   return linkWrapper;
 };
 
