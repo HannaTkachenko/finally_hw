@@ -126,6 +126,14 @@ const stringToColour = (str) => {
   return colour;
 };
 
+const createErrorSection = () => {
+  return createElement(
+    "section",
+    { classNames: ["error"] },
+    document.createTextNode("Sorry, we have some trouble")
+  );
+};
+
 fetch("./data.json")
   .then((response) => response.json())
   .then((users) => {
@@ -135,7 +143,7 @@ fetch("./data.json")
     root.append(...cards);
   })
   .catch((error) => {
-    document.body.prepend(document.createTextNode("500"));
+    document.body.prepend(createErrorSection());
 
     if (error instanceof TypeError) {
       console.error("Ошибка соединения: ", error);
