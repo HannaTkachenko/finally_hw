@@ -56,12 +56,10 @@ const createUserName = (user) => {
 
 const createLink = (element) => {
   const url = new URL(element);
-  const link = document.createElement("a");
-  link.classList.add("fa-brands");
-  link.classList.add(mapSocialClass.get(url.hostname));
-  link.setAttribute("href", element);
-  link.setAttribute("target", "_blank");
-
+  const link = createElement("a", {
+    classNames: ["fa-brands", mapSocialClass.get(url.hostname)],
+    attributes: { href: element, target: "_blank" },
+  });
   return link;
 };
 
