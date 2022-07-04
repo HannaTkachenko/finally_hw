@@ -38,7 +38,7 @@ const getFullName = (user) => `${user.firstName} ${user.lastName}`;
 const createCard = (user) => {
   return createElement(
     "article",
-    { classNames: ["card"] },
+    { classNames: ["card"], events: { click: chooseHandler } },
     createCardWrapper(user),
     createUserName(user),
     createLinkWrapper(user)
@@ -135,34 +135,30 @@ fetch("./data.json")
     root.append(...cards);
   })
   .catch((error) => {
-    document.body.prepend(document.createTextNode('500'));
-    
+    document.body.prepend(document.createTextNode("500"));
+
     if (error instanceof TypeError) {
       console.error("Ошибка соединения: ", error);
-    }else if (error instanceof SyntaxError) {
+    } else if (error instanceof SyntaxError) {
       console.error("Проверь запятые: ", error);
-    }else{
+    } else {
       console.error(error);
     }
-  })
-
+  });
 
 const stateSet = new Set();
 const state = [];
 const choosed = document.getElementById("choosed");
 
-document.addEventListener("click", (e) => {
+const chooseHandler = (e) => {
   e.preventDefault();
-  const choosedUserName =
-    e.target.innerText.length > 2 ? e.target.innerText : (undefined.style.display = none);
-//костыль, чтобы не отображались инициалы при клике на фотографию//
+  const choosedUserName = e.target.innerText;
 
   if (!state.includes(choosedUserName)) {
     state.push(choosedUserName);
     choosed.append(createList(choosedUserName));
   }
-});
-
+};
 const createList = (choosedUserName) => {
   return createElement(
     "li",
