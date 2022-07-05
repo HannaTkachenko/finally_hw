@@ -29,6 +29,7 @@ const createElement = (
   for (const [typeEvent, handlerEvent] of Object.entries(events)) {
     element.addEventListener(typeEvent, handlerEvent);
   }
+
   element.append(...children);
   return element;
 };
@@ -73,13 +74,12 @@ const createLinkWrapper = (user) => {
 };
 
 const createImage = ({ id, profilePicture, firstName }) => {
-  const img = document.createElement("img");
-  img.classList.add("card-photo");
-  img.setAttribute("src", profilePicture);
-  img.setAttribute("alt", firstName);
-  img.dataset.id = `wrapper-${id}`;
-  img.addEventListener("error", photoErrorHandler);
-  img.addEventListener("load", photoLoadHandler);
+  const img = createElement("img", {
+    classNames: ["card-photo"],
+    attributes: { src: profilePicture, alt: firstName, id: `wrapper-${id}` },
+    events: { error: photoErrorHandler, load: photoLoadHandler },
+  });
+  return img;
 };
 
 const createCardWrapper = (user) => {
@@ -99,7 +99,7 @@ const createCardWrapper = (user) => {
 };
 
 const photoLoadHandler = ({ target }) => {
-  const parent = document.getElementById(target.dataset.id);
+  const parent = document.getElementById(target.id);
   parent.append(target);
 };
 
