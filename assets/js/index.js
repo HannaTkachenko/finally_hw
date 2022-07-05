@@ -82,18 +82,24 @@ const createImage = ({ id, profilePicture, firstName }) => {
   return img;
 };
 
-const createCardWrapper = (user) => {
-  const { id, firstName, lastName } = user;
-  const photoWrapper = document.createElement("div");
-  photoWrapper.classList.add("card-photo-wrapper");
-  photoWrapper.setAttribute("id", `wrapper-${id}`);
+const createInitials = (user) => {
+  const { firstName, lastName } = user;
 
-  const initials = document.createElement("div");
-  initials.classList.add("card-initials");
-  initials.style.backgroundColor = stringToColour(firstName);
+  const initials = createElement("div", {
+    classNames: ["card-initials"],
+  });
   initials.append(document.createTextNode(firstName[0] + lastName[0] || "NN"));
+  initials.style.backgroundColor = stringToColour(firstName);
+  return initials;
+};
 
-  photoWrapper.append(initials);
+const createCardWrapper = (user) => {
+  const { id } = user;
+  const photoWrapper = createElement("div", {
+    classNames: ["card-photo-wrapper"],
+    attributes: { id: `wrapper-${id}` },
+  });
+  photoWrapper.append(createInitials(user));
   createImage(user);
   return photoWrapper;
 };
